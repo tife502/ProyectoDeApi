@@ -33,4 +33,3 @@ fetch("https://fake-api-vq1l.onrender.com/posts", {
   });
 
 
-  /*  ${product.title} <img src= "${images[0]}" >  */
