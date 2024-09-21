@@ -17,7 +17,7 @@ fetch("https://fake-api-vq1l.onrender.com/posts", {
       //const img = document.getElementById("img");
       //img.src = images[0];
       const myhtml = `
-      <div  id="${product.id}" class="card" style="width: 18rem;  margin: 20px;" >
+      <div  id="${product.id}" class="card" style="width: 15rem;  margin: 15px;" >
         <img src="${images[0]} " class="card-img-top" alt = "...">
         <div class="card-body">
         <h5 class="card-title">${product.title}</h5>
