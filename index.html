@@ -9,25 +9,29 @@
   </head>
 
   <body>
-    <h1>Armas Terraria Pre Hard mode</h1>
 
-    <label for="title"> Title</label>
-    <input id="title" type="text">
+    <section id="encabezado">
+        <h1>Armas Terraria Pre Hard mode</h1>
 
-    <label for="description">Description</label>
-    <input id="description" type="text">
+        <label for="title"> Title</label>
+        <input id="title" type="text">
 
-    <label for="value">Value</label>
-    <input id="value" type="number">
+        <label for="description">Description</label>
+        <input id="description" type="text">
 
-    <label for="imanumberge">Image</label>
-    <input id="image" type="text">
+        <label for="value">Value</label>
+        <input id="value" type="number">
 
-    <label for="Category">Categories</label>
-    <select name="Categorys" id="category">
-    </select>
+        <label for="imanumberge">Image</label>
+        <input id="image" type="text">
 
-    <button onclick="sendForm()"> Guardar</button>
+        <label for="Category">Categories</label>
+        <select name="Categorys" id="category">
+        </select>
+
+        <button  id="saveButton" onclick="sendForm()"> Guardar</button>
+    </section>
+    
 
     
     <ul style = 
@@ -39,7 +43,6 @@
         id = "List">
     </ul>
     
-   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   </body>

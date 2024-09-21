@@ -1,7 +1,7 @@
 fetch("https://fake-api-vq1l.onrender.com/posts", {
   headers: {
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjU2NzQwMjAsImV4cCI6MTc0Mjk1NDAyMH0.uh8nG5dyUwd-gYdQdt4dmLIIF3YaqV4ZoLKmVV5toUQ",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
   },
 })
   //Pasarlo a json
@@ -11,7 +11,6 @@ fetch("https://fake-api-vq1l.onrender.com/posts", {
     const List = document.getElementById("List");
 
     data.forEach((product) => {
-      console.log(product.title);
       const il = document.createElement("li");
       const images = JSON.parse(product.images);
       //const img = document.getElementById("img");
@@ -22,9 +21,9 @@ fetch("https://fake-api-vq1l.onrender.com/posts", {
         <div class="card-body">
         <h5 class="card-title">${product.title}</h5>
         <p class="card-text">${product.description}</p>
-        <p class="card-text">${product.value}</p>
-          <button type="button" class="btn btn-outline-warning">EDITAR</button>
-          <button type="button" onclick = ""class="btn btn-outline-danger">ELIMINAR</button>
+        <p class="card-text">${product.id}</p>
+          <button type="button" onclick="editPost(${product.id})" class="btn btn-outline-warning">EDITAR</button>
+          <button type="button" onclick="deletePost(${product.id})" class="btn btn-outline-danger">ELIMINAR</button>
         </div>
       </div>`;
       
@@ -35,47 +34,48 @@ fetch("https://fake-api-vq1l.onrender.com/posts", {
 // //<p class="card-text">${product.description}</p>
 
 
-  function sendForm(){
-    const title = document.getElementById("title");
-    const description = document.getElementById("description");
-    const value = document.getElementById("value");
-    const image = document.getElementById("image");
-    const category = document.getElementById("category");
-    console.log(category.value);
-    const body ={
-      title: title.value,
-      description: description.value,
-      value: value.value,
-      images: [image.value]
-      
-    }
-    fetch("https://fake-api-vq1l.onrender.com/posts", {
-      method: "POST", 
-      headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI4LCJlbWFpbCI6InRlc3RAbWFpbC5jb20iLCJpYXQiOjE3MjU0MjEwOTQsImV4cCI6MTc0MjcwMTA5NH0.aHg7Hq1tGOI8QCnYo1PgUym229x7_SbrCQpk_tAYITs",
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(body)
-    })
-    .then( res => res.json())
-    .then( res => {
-      console.log(
-        "respuesta de la api", res
-      )
-      title.value = "";
-      description.value = "";
-      value.value = "";
-      image.value = "";
-      location.reload();
-    })
-  
-  }
+function sendForm() {
+  const id = document.getElementById("saveButton").dataset.id || null;
+  const title = document.getElementById("title").value;
+  const description = document.getElementById("description").value;
+  const value = document.getElementById("value").value;
+  const image = document.getElementById("image").value;
+  const category = document.getElementById("category").value;
+
+  const body = {
+    title,
+    description,
+    value,
+    images: [image],
+    category_id: category,
+  };
+
+  // Si hay un id, se está editando un producto; si no, se está creando uno nuevo
+  const method = id ? "PATCH" : "POST";
+  const url = id
+    ? `https://fake-api-vq1l.onrender.com/posts/${id}`
+    : "https://fake-api-vq1l.onrender.com/posts";
+
+  fetch(url, {
+    method,
+    headers: {
+      Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((updatedProduct) => {
+      console.log("Producto actualizado/creado:", updatedProduct);
+      location.reload(); // Recargar la página para ver los cambios
+    });
+}
 
   function deletePost(id){
     fetch(`https://fake-api-vq1l.onrender.com/posts/${id}`, {
       method: "DELETE", 
       headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI4LCJlbWFpbCI6InRlc3RAbWFpbC5jb20iLCJpYXQiOjE3MjU0MjEwOTQsImV4cCI6MTc0MjcwMTA5NH0.aHg7Hq1tGOI8QCnYo1PgUym229x7_SbrCQpk_tAYITs",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
       },
     })
     .then( res => res.json())
@@ -91,7 +91,7 @@ fetch("https://fake-api-vq1l.onrender.com/posts", {
   fetch("https://fake-api-vq1l.onrender.com/category", {
     headers: {
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjU2NzQwMjAsImV4cCI6MTc0Mjk1NDAyMH0.uh8nG5dyUwd-gYdQdt4dmLIIF3YaqV4ZoLKmVV5toUQ",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
     },
   })
     //Pasarlo a json
@@ -101,13 +101,32 @@ fetch("https://fake-api-vq1l.onrender.com/posts", {
       const categories = document.getElementById("category");
   
       data.forEach((category) => {
-        console.log(category.name);
         const options = document.createElement("option");
         options.innerHTML = category.name;
         options.value = category.category_id;  
         options.id = category.category_id;  
-        if(category.category_id == 5) options.selected = true;
-        console.log(options)
+        if(category.category_id == 6) options.selected = true;
         categories.appendChild(options);
       });
     });
+
+
+    function editPost(id) {
+      fetch(`https://fake-api-vq1l.onrender.com/posts/${id}`, {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
+        },
+      })
+        .then((response) => response.json())
+        .then((product) => {
+          // Rellenar los campos del formulario con la info del producto
+          document.getElementById("title").value = product.title;
+          document.getElementById("description").value = product.description;
+          document.getElementById("value").value = product.value;
+          document.getElementById("image").value = JSON.parse(product.images)[0];
+          document.getElementById("category").value = product.category_id;
+          
+          // Guardar el id del producto que se está editando
+          document.getElementById("saveButton").dataset.id = id;
+        });
+    }
