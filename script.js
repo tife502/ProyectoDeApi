@@ -1,39 +1,3 @@
-fetch("https://fake-api-vq1l.onrender.com/posts", {
-  headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
-  },
-})
-  //Pasarlo a json
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    const List = document.getElementById("List");
-
-    data.forEach((product) => {
-      const il = document.createElement("li");
-      const images = JSON.parse(product.images);
-      //const img = document.getElementById("img");
-      //img.src = images[0];
-      const myhtml = `
-      <div  id="${product.id}" class="card" style="width: 15rem;  margin: 15px;" >
-        <img src="${images[0]} " class="card-img-top" alt = "...">
-        <div class="card-body">
-        <h5 class="card-title">${product.title}</h5>
-        <p class="card-text">${product.description}</p>
-        <p class="card-text">${product.id}</p>
-          <button type="button" onclick="editPost(${product.id})" class="btn btn-outline-warning">EDITAR</button>
-          <button type="button" onclick="deletePost(${product.id})" class="btn btn-outline-danger">ELIMINAR</button>
-        </div>
-      </div>`;
-      
-      il.innerHTML = myhtml;
-      List.appendChild(il);
-    });
-  });
-// //<p class="card-text">${product.description}</p>
-
-
 function sendForm() {
   const id = document.getElementById("saveButton").dataset.id || null;
   const title = document.getElementById("title").value;
@@ -130,3 +94,108 @@ function sendForm() {
           document.getElementById("saveButton").dataset.id = id;
         });
     }
+
+
+
+    fetch("https://fake-api-vq1l.onrender.com/category", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
+      },
+    })
+      //Pasarlo a json
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const container =  document.getElementById("container");
+    
+        data.forEach((category) => {
+          const seccion = `
+        <section >
+          <h2>${category.name}</h2>
+          <ul style = 
+          "list-style-type: none; 
+          display: flex; flex-wrap: wrap;
+          justify-content: space-between; 
+          padding: 0px; 
+          margin: 40px 20px 0 40px;"  
+          id = "Lista-${category.category_id}">
+          </ul>
+        </section>
+          `
+          container.innerHTML += seccion;
+        });
+          // addlist();
+          fetch("https://fake-api-vq1l.onrender.com/posts", {
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
+            },
+          })
+            //Pasarlo a json
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+          
+              data.forEach((product) => {
+                const List = document.getElementById(`Lista-${product.category_id}`);
+                console.log(List);
+                const il = document.createElement("li");
+                const images = JSON.parse(product.images);
+                //const img = document.getElementById("img");
+                //img.src = images[0];
+                const myhtml = `
+                <div  id="${product.id}" class="card" style="width: 15rem;  margin: 15px;" >
+                  <img src="${images[0]} " class="card-img-top" alt = "...">
+                  <div class="card-body">
+                  <h5 class="card-title">${product.title}</h5>
+                  <p class="card-text">${product.description}</p>
+                  <p class="card-text">${product.id}</p>
+                    <button type="button" onclick="editPost(${product.id})" class="btn btn-outline-warning">EDITAR</button>
+                    <button type="button" onclick="deletePost(${product.id})" class="btn btn-outline-danger">ELIMINAR</button>
+                  </div>
+                </div>`;
+                il.innerHTML = myhtml;
+                List.appendChild(il);
+              });
+            });
+      });
+
+
+
+    function addlist(){
+      // fetch("https://fake-api-vq1l.onrender.com/posts", {
+      //   headers: {
+      //     Authorization:
+      //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImouZHVyYW4yQHV0cC5lZHUuY28iLCJpYXQiOjE3MjY4ODQzMTYsImV4cCI6MTc0NDE2NDMxNn0.4PE0SgarbzuJubXxqsVnP4ECYvyr9r4BMet9SwjsiQo",
+      //   },
+      // })
+      //   //Pasarlo a json
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      
+      //     data.forEach((product) => {
+      //       const List = document.getElementById(`Lista-${product.category_id}`);
+      //       console.log(List);
+      //       const il = document.createElement("li");
+      //       const images = JSON.parse(product.images);
+      //       //const img = document.getElementById("img");
+      //       //img.src = images[0];
+      //       const myhtml = `
+      //       <div  id="${product.id}" class="card" style="width: 15rem;  margin: 15px;" >
+      //         <img src="${images[0]} " class="card-img-top" alt = "...">
+      //         <div class="card-body">
+      //         <h5 class="card-title">${product.title}</h5>
+      //         <p class="card-text">${product.description}</p>
+      //         <p class="card-text">${product.id}</p>
+      //           <button type="button" onclick="editPost(${product.id})" class="btn btn-outline-warning">EDITAR</button>
+      //           <button type="button" onclick="deletePost(${product.id})" class="btn btn-outline-danger">ELIMINAR</button>
+      //         </div>
+      //       </div>`;
+      //       il.innerHTML = myhtml;
+      //       List.appendChild(il);
+      //     });
+      //   });
+    }
+    
