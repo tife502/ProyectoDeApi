@@ -164,7 +164,6 @@ function sendForm() {
               <div class="card-body">
                 <h5 class="card-title">${product.title}</h5>
                 <p class="card-text">${product.description}</p>
-                <p class="card-text">${product.id}</p>
                 <button type="button" onclick="editPost(${product.id})" class="btn btn-outline-primary">EDITAR</button>
                 <button type="button" onclick="deletePost(${product.id})" class="btn btn-outline-success">ELIMINAR</button>
                 </div>
