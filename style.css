@@ -1,0 +1,212 @@
+/* Estilo general del cuerpo */
+body {
+    background-color: #87CEEB; /* Cielo de Terraria */
+    font-family: 'Press Start 2P', cursive; /* Fuente pixelada */
+    color: #FFFFFF; /* Color blanco del texto */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-image: url('https://www.terraria.org/static/img/bg/surface1.jpg'); /* Fondo de estilo Terraria */
+    background-size: cover;
+  }
+  
+  /* Estilo del encabezado */
+  header {
+    background-color: #1e2024; /* Color oscuro para el menú */
+    padding: 10px;
+    font-size: 18px;
+  }
+  
+  header ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  header li {
+    display: inline;
+    margin: 0 15px;
+  }
+  
+  header a {
+    color: #FFD700; /* Dorado de Terraria */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  header a:hover {
+    color: #32CD32; /* Verde brillante */
+  }
+  
+  /* Estilo de los títulos */
+  h1, h2 {
+    font-size: 32px;
+    color: #FFD700; /* Dorado */
+    text-shadow: 2px 2px #000000; /* Sombras para un efecto pixelado */
+  }
+  
+  /* Estilo del formulario */
+  .creararma, .crearcategory {
+    background-color: #4B5320; /* Verde oscuro tipo bosque */
+    border: 2px solid #FFD700;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0px 0px 15px #000000;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+  }
+  
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    border: 2px solid #000;
+    background-color: #87CEEB;
+    color: #000;
+    box-shadow: 0px 0px 5px #000;
+  }
+  
+  input[type="text"], input[type="number"], select {
+    background-color: #5F9EA0; /* Azul claro estilo retro */
+    color: #FFFFFF;
+  }
+  
+  /* Botones */
+  button {
+    background-color: #FFD700;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+    background-color: #32CD32; /* Verde brillante */
+  }
+  
+  button:active {
+    transform: scale(0.9);
+  }
+  
+  /* Estilo de las tarjetas de productos */
+  .card {
+    background-color: #5F9EA0;
+    border: 2px solid #000000;
+    margin: 20px;
+    box-shadow: 0px 0px 10px #000;
+  }
+  
+  .card-body {
+    background-color: #4B5320;
+    color: #FFFFFF;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    color: #FFD700;
+    text-shadow: 2px 2px #000000;
+  }
+  
+  .card-text {
+    font-size: 14px;
+    color: #FFFFFF;
+  }
+  
+  /* Estilo para las imágenes de las armas */
+  .card-img-top {
+    border-bottom: 2px solid #000000;
+  }
+  
+  /* Sección de categorías */
+  section {
+    margin-top: 40px;
+    padding: 20px;
+    border: 2px solid #FFD700;
+    background-color: #4B5320;
+    box-shadow: 0px 0px 15px #000000;
+  }
+  
+  ul {
+    padding: 0;
+  }
+  
+  li {
+    list-style: none;
+    margin: 10px 0;
+  }
+  
+  a {
+    color: #FFD700;
+  }
+  
+  a:hover {
+    color: #32CD32;
+  }
+  
+  /* Contenedor de productos */
+  #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #container ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  #container li {
+    margin: 10px;
+  }
+/* Estilo para la barra de navegación */
+#navegacion {
+    position: fixed; /* Fijo en la parte superior */
+    top: 0;
+    width: 100%; /* Ocupa el 100% del ancho de la pantalla */
+    background-color: rgba(20, 24, 28, 0.9); /* Fondo semi-transparente */
+    padding: 10px;
+    display: flex;
+    justify-content: center; /* Centra los elementos */
+    z-index: 1000; /* Para que quede por encima del resto del contenido */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+  }
+  
+  /* Estilo para los enlaces de navegación */
+  #navegacion ul {
+    display: flex; /* Coloca los elementos en fila */
+    list-style-type: none; /* Quita los puntos de la lista */
+    padding: 0;
+    margin: 0;
+  }
+  
+  #navegacion li {
+    margin: 0 20px; /* Espacio entre los elementos */
+  }
+  
+  #navegacion a {
+    text-decoration: none;
+    color: #ffffff; /* Color de texto */
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Efecto hover en los enlaces */
+  #navegacion a:hover {
+    background-color: #4a90e2; /* Color de fondo al pasar el mouse */
+  }
+  
+  /* Agregar espacio superior al contenido para evitar que se superponga con la barra fija */
+  body {
+    padding-top: 60px;
+  }
+    

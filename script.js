@@ -35,6 +35,8 @@ function sendForm() {
     });
 }
 
+
+
   function deletePost(id){
     fetch(`https://fake-api-vq1l.onrender.com/posts/${id}`, {
       method: "DELETE", 
@@ -61,7 +63,6 @@ function sendForm() {
     //Pasarlo a json
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       const categories = document.getElementById("category");
   
       data.forEach((category) => {
@@ -106,16 +107,19 @@ function sendForm() {
       //Pasarlo a json
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const container =  document.getElementById("container");
-    
+        const navegacion = document.getElementById("navegacion");
         data.forEach((category) => {
+          const ircategories = `
+          <ul>
+              <li><a href="#${category.name}">${category.name}</a></li>
+          </ul>`
           const seccion = `
-        <section >
+        <section id = "${category.name}">
           <div>
             <h2>${category.name}</h2>
-            <button type="button" onclick="editPostCategory(${category.category_id})" class="btn btn-outline-warning">EDITAR</button>
-            <button type="button" onclick="deletePostCategory(${category.category_id})" class="btn btn-outline-danger">ELIMINAR</button>
+            <button type="button" onclick="editPostCategory(${category.category_id})" class="btn btn-outline-primary">EDITAR</button>
+            <button type="button" onclick="deletePostCategory(${category.category_id})" class="btn btn-outline-success">ELIMINAR</button>
           </div>
           <ul style = 
           "
@@ -128,7 +132,9 @@ function sendForm() {
           </ul>
         </section>
           `
+
           container.innerHTML += seccion;
+          navegacion.innerHTML += ircategories;
         });
           addlist();     
             
@@ -145,9 +151,7 @@ function sendForm() {
       })
         //Pasarlo a json
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-      
+        .then((data) => {      
           data.forEach((product) => {
             const List = document.getElementById(`Lista-${product.category_id}`);
             const il = document.createElement("li");
@@ -158,18 +162,19 @@ function sendForm() {
             <div  id="${product.id}" class="card" style="width: 15rem;  margin: 15px;" >
               <img src="${images[0]} " class="card-img-top" alt = "...">
               <div class="card-body">
-              <h5 class="card-title">${product.title}</h5>
-              <p class="card-text">${product.description}</p>
-              <p class="card-text">${product.id}</p>
-                <button type="button" onclick="editPost(${product.id})" class="btn btn-outline-warning">EDITAR</button>
-                <button type="button" onclick="deletePost(${product.id})" class="btn btn-outline-danger">ELIMINAR</button>
-              </div>
-            </div>`;
+                <h5 class="card-title">${product.title}</h5>
+                <p class="card-text">${product.description}</p>
+                <p class="card-text">${product.id}</p>
+                <button type="button" onclick="editPost(${product.id})" class="btn btn-outline-primary">EDITAR</button>
+                <button type="button" onclick="deletePost(${product.id})" class="btn btn-outline-success">ELIMINAR</button>
+                </div>
+              </div>`;
             il.innerHTML = myhtml;
             List.appendChild(il);
           });
         });
     }
+
 
 
     function sendFormCategory() {
@@ -181,7 +186,7 @@ function sendForm() {
       const bodyCategory = {
         name,
         description,
-        image: [image],
+        image: image,
       };
     
       // Si hay un id, se está editando un producto; si no, se está creando uno nuevo
@@ -189,8 +194,6 @@ function sendForm() {
       const url = id
         ? `https://fake-api-vq1l.onrender.com/category/${id}`
         : "https://fake-api-vq1l.onrender.com/category";
-    
-
       console.log(bodyCategory);
 
       fetch(url, {
@@ -208,6 +211,8 @@ function sendForm() {
         });
       }
 
+
+
       function editPostCategory(id) {
         fetch(`https://fake-api-vq1l.onrender.com/category/${id}`, {
           headers: {
@@ -219,7 +224,7 @@ function sendForm() {
             // Rellenar los campos del formulario con la info del producto
             document.getElementById("name").value = category.name;
             document.getElementById("descriptioncategory").value = category.description;
-            document.getElementById("imanumbergecategory").value = JSON.parse(category.image)[0];
+            document.getElementById("imanumbergecategory").value = category.image;
             // Guardar el id del producto que se está editando
             document.getElementById("saveButtonCategory").dataset.id = id;
           });
