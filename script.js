@@ -70,7 +70,7 @@ function sendForm() {
         options.innerHTML = category.name;
         options.value = category.category_id;  
         options.id = category.category_id;  
-        if(category.category_id == 6) options.selected = true;
+        if(category.category_id == 14) options.selected = true;
         categories.appendChild(options);
       });
     });
